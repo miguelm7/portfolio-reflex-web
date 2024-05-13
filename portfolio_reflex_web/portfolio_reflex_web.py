@@ -1,36 +1,59 @@
-"""Welcome to Reflex! This file outlines the steps to create a basic app."""
-
 from rxconfig import config
-
 import reflex as rx
+from .views.header import header
+from .views.footer import footer
+from .styles.styles import (
+    SIZE,
+    EM_SIZE,
+    MAX_WIDTH,
+    IMAGE_HEIGHT,
+    STYLESHEETS,
+    BASE_STYLE
+)
 
-docs_url = "https://reflex.dev/docs/getting-started/introduction/"
-filename = f"{config.app_name}/{config.app_name}.py"
+from .components.heading import heading
 
 
-class State(rx.State):
-    """The app state."""
+# class State(rx.State):
+#     """The app state."""
 
 
 def index() -> rx.Component:
     return rx.center(
-        # rx.theme_panel(),
-        rx.vstack(
-            rx.heading("Welcome to my Portfolio!", size="9"),
-            # rx.text("Get started by editing ", rx.code(filename)),
-            # rx.button(
-            #     "Check out our docs!",
-            #     on_click=lambda: rx.redirect(docs_url),
-            #     size="4",
-            # ),
-            rx.logo(),
-            align="center",
-            spacing="7",
-            font_size="2em",
-        ),
-        height="100vh",
+            rx.vstack(
+            header(),
+            heading("Sobre mí"),
+            rx.text(
+                """
+                Data Scientist con más de 3 años de experiencia en el desarrollo de soluciones de analítica de datos,
+                ingeniería de datos y Machine Learning. Experiencia en la creación de procesos ETL, desarrollo y
+                mantenimiento de modelos de aprendizaje automático, desarrollo de APIs, análisis exploratorio y
+                visualización de datos. Analítico y creativo en la resolución de problemas.
+                """
+                ),
+            rx.divider(),
+            rx.text("Tecnologias"),
+            rx.text("Experiencia"),
+            rx.text("Proyectos"),
+            rx.text("Formación"),
+            rx.text("Extra"),
+            rx.divider(),
+            footer(),
+            # end
+            max_width=MAX_WIDTH,
+            padding=EM_SIZE.SMALL,
+            width="100%"
+        )
     )
 
 
-app = rx.App()
+app = rx.App(
+    # stylesheets=STYLESHEETS,
+    # style=BASE_STYLE,
+    theme=rx.theme(
+        appearance="light",
+        accent_color="gray",
+        radius="full"
+    )
+)
 app.add_page(index)
