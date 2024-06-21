@@ -13,6 +13,8 @@ from .styles.styles import (
 
 from .components.heading import heading
 
+G_TAG = "G-W0XSPLQDLS"
+
 
 # class State(rx.State):
 #     """The app state."""
@@ -47,13 +49,24 @@ def index() -> rx.Component:
     )
 
 
-app = rx.App(
-    # stylesheets=STYLESHEETS,
-    # style=BASE_STYLE,
+app = rx.App(    
+    head_components=[
+        rx.script(src=f"https://www.googletagmanager.com/gtag/js?id={G_TAG}"),
+        rx.script(
+            f"""
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){{dataLayer.push(arguments);}}
+            gtag('js', new Date());
+            gtag('config', '{G_TAG}');
+            """
+        ),
+        
+    ],
     theme=rx.theme(
         appearance="light",
         accent_color="gray",
         radius="full"
     )
 )
+
 app.add_page(index)
