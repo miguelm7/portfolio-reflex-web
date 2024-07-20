@@ -20,7 +20,7 @@ def header() -> rx.Component:
         ),
         rx.vstack(
             heading("Miguel Moreno Rodríguez",True),
-            heading("Data Scientist y desarrollador de software"),
+            heading("Data Scientist | Python Developer"),
             rx.text(
                 rx.icon("map-pin"),
                 "Alicante",
